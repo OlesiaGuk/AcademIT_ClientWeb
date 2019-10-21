@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница 1</title>
+</head>
+<body>
+<h3>Заявка на обучение:</h3>
+<form action="message.html" method="post">
+    <p><label>
+        Фамилия: <input type="text" placeholder="Введите фамилию" name="userSurname">
+    </label></p>
+    <p><label>
+        Имя: <input type="text" placeholder="Введите имя" name="userName">
+    </label></p>
+    <p><label>
+        Интересующие курсы:
+        <select size="3" multiple name="courses[]">
+            <option value="android">Android</option>
+            <option value="ios">iOS</option>
+            <option value="Java">Java</option>
+        </select>
+    </label></p>
+    <p><label>
+        Город:
+        <select name="city">
+            <option value="Новосибирск">Новосибирск</option>
+            <option value="Томск">Томск</option>
+            <option value="Омск">Омск</option>
+        </select>
+    </label></p>
+    <p>В неделю готов уделять обучению: <br>
+        <label>
+            <input type="radio" name="radiobutton" value="less10" checked="checked">Менее 10 часов<br>
+        </label>
+        <label>
+            <input type="radio" name="radiobutton" value="from10To20">От 10 до 20 часов<br>
+        </label>
+        <label>
+            <input type="radio" name="radiobutton" value="from20">Более 20 часов<br>
+        </label>
+    </p>
+    <p><label>
+        Опыт: <textarea rows="5" cols="30" placeholder="Кратко опишите текущий опыт"
+                        name="question1Textarea"></textarea>
+    </label></p>
+    <label>
+        <input type="checkbox" name="mailing" value="wantMailing"> Хочу получать рассылки <br>
+    </label>
+    <label>
+        <input type="checkbox" name="personalDataProcessing" value="processingAllowed"> Согласен на обработку
+        персональных данных<br>
+    </label>
+    <p>
+        <button type="submit">Отправить заявку</button>
+    </p>
+    <p><a href="page2.html">Перейти на страницу 2</a></p>
+</form>
+</body>
+</html>
