@@ -1,0 +1,36 @@
+body {
+    background-color: #FEEED6;
+    margin: auto;
+    width: 825px;
+    color: #676565;
+    text-align: justify;
+    font-size: 13pt;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 24pt;
+    font-weight: lighter;
+    text-align: left;
+    text-shadow: 1px 1px 1px;
+}
+
+p {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+p.text {
+    text-indent: 20px;
+}
+
+.header_blue {
+    color: #378DB2;
+    font-weight: bold;
+}
+
+.text_line-through {
+    text-decoration: line-through;
+}
+
+
