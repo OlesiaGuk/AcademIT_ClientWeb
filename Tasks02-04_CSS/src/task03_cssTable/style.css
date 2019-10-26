@@ -1,0 +1,23 @@
+table {
+    width: 860px;
+    margin: auto;
+    font-size: 16pt;
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+    border-spacing: 0;
+}
+
+thead {
+    font-weight: bold;
+    background-color: #3498DB;
+    color: white;
+    text-align: left;
+}
+
+td, th {
+    border: 1px solid lightgrey;
+    padding: 15px 10px 10px;
+}
+
+.row-blue {
+    background-color: #EEEEEE;
+}
