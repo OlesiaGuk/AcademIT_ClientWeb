@@ -1,18 +1,19 @@
 body {
     background-color: #FEEED6;
     margin: auto;
-    width: 825px;
+    max-width: 825px;
+    width: 100%;
     color: #676565;
     text-align: justify;
     font-size: 13pt;
     font-family: Arial, sans-serif;
+    position: relative;
 }
 
 h1 {
     font-size: 24pt;
     font-weight: lighter;
     text-align: left;
-    text-shadow: 1px 1px 1px;
 }
 
 p {
