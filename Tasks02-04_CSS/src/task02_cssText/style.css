@@ -1,4 +1,4 @@
-body {
+.body-styles {
     background-color: #FEEED6;
     margin: auto;
     max-width: 825px;
@@ -7,30 +7,29 @@ body {
     text-align: justify;
     font-size: 13pt;
     font-family: Arial, sans-serif;
-    position: relative;
 }
 
-h1 {
+.header-main {
     font-size: 24pt;
     font-weight: lighter;
     text-align: left;
 }
 
-p {
+.margins {
     margin-bottom: 10px;
     margin-top: 0;
 }
 
-p.text {
+.text-indent {
     text-indent: 20px;
 }
 
-.header_blue {
+.header-blue {
     color: #378DB2;
     font-weight: bold;
 }
 
-.text_line-through {
+.text-line-through {
     text-decoration: line-through;
 }
 
