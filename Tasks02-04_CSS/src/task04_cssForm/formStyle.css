@@ -1,7 +1,57 @@
-body {
+.common-style {
     background-color: #FEEED6;
+    font-family: Arial, sans-serif;
+    color: grey;
 }
 
-form{
-    width: 800px;
+.header-background {
+    background-color: white;
+    margin-block-start: 0;
+}
+
+.header {
+    max-width: 800px;
+    margin: auto;
+    font-weight: lighter;
+    font-size: 34px;
+}
+
+.form-style {
+    max-width: 800px;
+    margin: auto;
+}
+
+.labels {
+    font-weight: bolder;
+}
+
+.fields-common {
+    border: none;
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 770px;
+}
+
+.fields-common::placeholder {
+    color: #B5B5BB;
+}
+
+.input-fields {
+    height: 40px;
+}
+
+.textarea {
+    height: 115px;
+    padding-top: 15px;
+}
+
+.send-button {
+    width: 170px;
+    height: 35px;
+    border: none;
+    background-color: #378DB2;
+    color: white;
+    font-weight: bolder;
+    float: right;
 }
