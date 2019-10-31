@@ -1,23 +1,24 @@
-table {
+.table-common {
     width: 860px;
     margin: auto;
     font-size: 16pt;
     font-family: Trebuchet MS, Helvetica, sans-serif;
     border-spacing: 0;
+    border: 1px solid lightgrey;
 }
 
-thead {
+.table-header {
     font-weight: bold;
     background-color: #3498DB;
     color: white;
     text-align: left;
 }
 
-td, th {
+.table-common td, th {
     border: 1px solid lightgrey;
     padding: 15px 10px 10px;
 }
 
-.row-blue {
+.table-body tr:nth-child(odd){
     background-color: #EEEEEE;
 }
