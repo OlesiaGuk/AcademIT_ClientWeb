@@ -14,11 +14,13 @@
     margin: auto;
     font-weight: lighter;
     font-size: 34px;
+    padding: 0 15px 0;
 }
 
 .form-style {
     max-width: 800px;
     margin: auto;
+    padding: 0 15px 0;
 }
 
 .labels {
