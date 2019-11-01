@@ -46,6 +46,7 @@
 .textarea {
     height: 115px;
     padding-top: 15px;
+    resize: vertical;
 }
 
 .send-button {
@@ -56,4 +57,9 @@
     color: white;
     font-weight: bolder;
     float: right;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #32728D;
 }
