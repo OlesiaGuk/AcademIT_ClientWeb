@@ -17,10 +17,10 @@
     padding: 0 15px 0;
 }
 
-.form-style {
+.form {
     max-width: 800px;
     margin: auto;
-    padding: 0 15px 0;
+    padding: 0 20px 0;
 }
 
 .labels {
@@ -30,9 +30,9 @@
 .fields-common {
     border: none;
     margin-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    width: 770px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 15px 0;
 }
 
 .fields-common::placeholder {
@@ -63,3 +63,4 @@
 .send-button:hover {
     background-color: #32728D;
 }
+
