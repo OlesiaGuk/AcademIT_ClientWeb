@@ -1,6 +1,11 @@
-.table-common {
-    width: 860px;
+.table {
+    max-width: 860px;
     margin: auto;
+    padding: 15px;
+}
+
+.table-common {
+    width: 100%;
     font-size: 16pt;
     font-family: Trebuchet MS, Helvetica, sans-serif;
     border-spacing: 0;
@@ -19,6 +24,7 @@
     padding: 15px 10px 10px;
 }
 
-.table-body tr:nth-child(odd){
+.table-body tr:nth-child(odd) {
     background-color: #EEEEEE;
 }
+
