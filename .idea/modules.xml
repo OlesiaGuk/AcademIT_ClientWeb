@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/ClientWeb.iml" filepath="$PROJECT_DIR$/ClientWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/Task01_HTML/Task01_HTML.iml" filepath="$PROJECT_DIR$/Task01_HTML/Task01_HTML.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tasks02-04_CSS/Tasks02-04_CSS.iml" filepath="$PROJECT_DIR$/Tasks02-04_CSS/Tasks02-04_CSS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tasks06-09_JS/Tasks06-09_JS.iml" filepath="$PROJECT_DIR$/Tasks06-09_JS/Tasks06-09_JS.iml" />
     </modules>
   </component>
 </project>
