@@ -1,0 +1,35 @@
+.common-style {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    margin: auto;
+    max-width: 400px;
+    text-align: center;
+    color: grey;
+    padding-bottom: 20px;
+}
+
+.form {
+    max-width: 350px;
+    margin: auto;
+    padding: 20px;
+    background-color: bisque;
+}
+
+.input-field, .output-field {
+    width: 50px;
+    height: 20px;
+    margin-left: 20px;
+}
+
+.button {
+    box-sizing: border-box;
+    width: 90px;
+    height: 25px;
+}
+
+.validation-message {
+    color: red;
+    font-style: italic;
+}
