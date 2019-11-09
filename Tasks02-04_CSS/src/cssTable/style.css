@@ -6,9 +6,9 @@
 
 .table-common {
     width: 100%;
-    font-size: 16pt;
+    font-size: 22px;
     font-family: Trebuchet MS, Helvetica, sans-serif;
-    border-spacing: 0;
+    border-collapse: collapse;
     border: 1px solid lightgrey;
 }
 
@@ -19,7 +19,7 @@
     text-align: left;
 }
 
-.table-common td, th {
+.table-common td, .table-common th {
     border: 1px solid lightgrey;
     padding: 15px 10px 10px;
 }
@@ -27,4 +27,3 @@
 .table-body tr:nth-child(odd) {
     background-color: #EEEEEE;
 }
-
