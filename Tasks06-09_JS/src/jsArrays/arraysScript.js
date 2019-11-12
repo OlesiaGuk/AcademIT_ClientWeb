@@ -13,13 +13,13 @@ console.log("Отсортированный массив: " + list);
 console.log("Подмассив из первых 5 элементов: " + list.slice(0, 5).join(","));
 console.log("Подмассив из последних 5 элементов: " + list.slice(list.length - 5).join(","));
 
-function evenNumbersSum(array) {
+function getEvenNumbersSum(array) {
     return array.filter(isEvenNumber).reduce(function (memo, e) {
         return memo + e;
     }, 0);
 }
 
-console.log("Сумма четных чисел массива = " + evenNumbersSum(list));
+console.log("Сумма четных чисел массива = " + getEvenNumbersSum(list));
 
 function isEvenNumber(e) {
     return e % 2 === 0;
@@ -33,12 +33,10 @@ for (var i = 1; i <= 100; i++) {
 console.log(array.join(","));
 
 //получить список квадратов четных чисел
-function sum(array) {
-    var newArray = [];
-    newArray.push(array.filter(isEvenNumber).map(function (e) {
+function getSquaresList(array) {
+    return array.filter(isEvenNumber).map(function (e) {
         return Math.pow(e, 2);
-    }));
-    return newArray;
+    });
 }
 
-console.log(sum(array).join(","));
+console.log(getSquaresList(array).join(","));
