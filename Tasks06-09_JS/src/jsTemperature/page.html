@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Перевод температур</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" type="text/css" href="temperatureStyle.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/temperatureStyle.css">
 </head>
 <body class="common-style">
 <h1 class="header">Перевод температур</h1>
 <form class="form">
-    <label>Введите исходное значение:
-        <input type="text" class="input-field" id="input-celsius"> &deg;C
+    <label>Введите исходное значение <br>(в градусах Цельсия):
+        <input type="text" class="input-field" id="input-celsius">
     </label>
-    <p>
+    <p class="button-align">
         <button type="button" class="button" id="convert-button">Перевести</button>
         <span style="display: none;" class="validation-message">Введите число!</span>
     </p>
-    <p><label>Кельвины: <input type="text" class="output-field" id="output-kelvin"></label></p>
-    <p><label>Градусы Фаренгейта: <input type="text" class="output-field" id="output-fahrenheit"></label></p>
-    <script src="temperatureScript.js"></script>
+    <p><label>Кельвины: <input type="text" class="output-field" id="output-kelvin" disabled></label></p>
+    <p><label>Градусы Фаренгейта: <input type="text" class="output-field" id="output-fahrenheit" disabled></label></p>
+    <script src="js/temperatureScript.js"></script>
 </form>
 </body>
 </html>

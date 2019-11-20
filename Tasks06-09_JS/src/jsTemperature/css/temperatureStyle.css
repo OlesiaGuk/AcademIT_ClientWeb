@@ -18,15 +18,23 @@
 }
 
 .input-field, .output-field {
-    width: 50px;
+    width: 70px;
     height: 20px;
     margin-left: 20px;
+    background-color: white;
+    border: 1px grey solid;
+    float: right;
+    padding: 2px 5px;
 }
 
 .button {
     box-sizing: border-box;
-    width: 90px;
+    width: 100px;
     height: 25px;
+}
+
+.button-align {
+    text-align: center;
 }
 
 .validation-message {
