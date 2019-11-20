@@ -19,29 +19,35 @@ document.addEventListener("DOMContentLoaded", function () {
             li.innerHTML = "<span></span><button type='button' class='buttons'>X</button>" +
                 "<button type='button' class='buttons'>Редактировать</button>";
 
-            li.children[0].textContent = text;
+            var textLine = li.children[0];
+            textLine.textContent = text;
 
             //удаление записи
-            li.children[1].addEventListener("click", function () {
+            var deleteButton = li.children[1];
+            deleteButton.addEventListener("click", function () {
                 todoList.removeChild(li);
             });
 
             //редактирование записи
-            li.children[2].addEventListener("click", function () {
+            var editButton = li.children[2];
+            editButton.addEventListener("click", function () {
                 li.innerHTML = "<input type='text'><button type='button' class='buttons'>Отменить</button>" +
                     "<button type='button' class='buttons'>Сохранить</button>";
 
-                li.children[0].value = text;
-                li.children[0].focus();
+                var editingText = li.children[0];
+                editingText.value = text;
+                editingText.focus();
 
                 //отменить редактирование
-                li.children[1].addEventListener("click", function () {
+                var editingCancel = li.children[1];
+                editingCancel.addEventListener("click", function () {
                     addNote(text);
                 });
 
                 //сохранить изменения
-                li.children[2].addEventListener("click", function () {
-                    var editedText = li.children[0].value;
+                var editingSave = li.children[2];
+                editingSave.addEventListener("click", function () {
+                    var editedText = editingText.value;
                     addNote(editedText);
                 });
             });
