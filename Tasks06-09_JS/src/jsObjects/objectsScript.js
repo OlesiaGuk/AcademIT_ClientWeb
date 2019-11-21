@@ -44,36 +44,32 @@ var countries = [
     }
 ];
 
-function f(array) {
-    var maxCount = 0;
-    array.forEach(function (c) {
-        var count = c.cities.length;
-        if (count > maxCount) {
-            maxCount = count;
-        }
-        return maxCount;
-    });
+function getMaxCitiesCountry(array) {
+    var maxCitiesCount = array.reduce(function (maxCount, currentCountry) {
+        return Math.max(maxCount, currentCountry.cities.length);
+    }, 0);
 
     return array.filter(function (c) {
-        return c.cities.length === maxCount;
+        return c.cities.length === maxCitiesCount;
     }).map(function (c) {
         return c.name;
     });
 }
 
-function f1(array) {
+function getCountriesInfoObject(array) {
     var countriesInfo = {};
-    array.map(function (c) {
+    array.forEach(function (c) {
         var key = c.name;
         var value = function () {
             return c.cities.reduce(function (memo, e) {
                 return memo + e.population;
             }, 0)
         };
-        return countriesInfo[key] = value();
+        countriesInfo[key] = value();
     });
+
     return countriesInfo;
 }
 
-console.log("Страны с максимальный количеством городов: " + f(countries));
-console.log(f1(countries));
+console.log("Страны с максимальный количеством городов: " + getMaxCitiesCountry(countries));
+console.log(getCountriesInfoObject(countries));
