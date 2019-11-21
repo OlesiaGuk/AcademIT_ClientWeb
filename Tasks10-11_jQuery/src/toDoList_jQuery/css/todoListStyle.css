@@ -1,0 +1,16 @@
+.common-style {
+    font-family: Arial, sans-serif;
+}
+
+.header, .work-field {
+    margin-left: 20px;
+}
+
+.validation-message {
+    color: red;
+    font-style: italic;
+}
+
+.buttons {
+    margin-left: 10px;
+}
