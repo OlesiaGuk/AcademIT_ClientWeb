@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhoneBook</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/phoneBookStyle.css">
+</head>
+<body class="common-style">
+<h1 class="header">Телефонная книга</h1>
+<form class="form-style">
+    <div class="form-header-align"><label class="form-header">Добавить новый контакт:</label></div>
+    <p><label>Фамилия:
+        <input type="text" class="input-field" id="surname">
+    </label></p>
+    <p><label>Имя:
+        <input type="text" class="input-field" id="name">
+    </label></p>
+    <p><label>Номер телефона:
+        <input type="tel" class="input-field" id="phone-number">
+    </label></p>
+    <p class="add-button-align">
+        <button type="submit" class="add-button">Добавить контакт</button>
+    </p>
+</form>
+<table class="table-common">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Номер телефона</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="phone-book">
+
+    </tbody>
+</table>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/underscore/underscore.js"></script>
+<script src="js/phoneBookScript.js"></script>
+</body>
+</html>

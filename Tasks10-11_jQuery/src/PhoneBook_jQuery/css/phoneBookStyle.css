@@ -1,0 +1,40 @@
+.common-style {
+    font-family: Arial, sans-serif;
+}
+
+.header, .form-header-align {
+    text-align: center;
+}
+
+.form-style {
+    width: 400px;
+    margin-left: 50px;
+    background-color: aqua;
+    padding: 20px;
+
+}
+
+.form-header{
+    font-style: italic;
+    font-weight: bolder;
+
+}
+
+.input-field {
+    float: right;
+}
+
+.add-button-align {
+    text-align: right;
+}
+
+.table-common{
+    width: 800px;
+    border-collapse: collapse;
+    margin: 50px;
+}
+
+.table-common td, .table-common th {
+    border: 1px solid lightgrey;
+    padding: 5px;
+}
