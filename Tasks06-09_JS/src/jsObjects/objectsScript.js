@@ -58,14 +58,12 @@ function getMaxCitiesCountry(array) {
 
 function getCountriesInfoObject(array) {
     var countriesInfo = {};
+
     array.forEach(function (c) {
         var key = c.name;
-        var value = function () {
-            return c.cities.reduce(function (memo, e) {
-                return memo + e.population;
-            }, 0)
-        };
-        countriesInfo[key] = value();
+        countriesInfo[key] = c.cities.reduce(function (memo, e) {
+            return memo + e.population;
+        }, 0)
     });
 
     return countriesInfo;
