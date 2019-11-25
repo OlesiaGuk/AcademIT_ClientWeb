@@ -2,10 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var inputText = document.getElementById("input-field");
     var addButton = document.getElementById("add-button");
     var todoList = document.getElementById("todo-list");
-    var validationMessage = document.querySelector(".validation-message");
+    var validationMessage = document.getElementById("input-validation-message");
 
     addButton.addEventListener("click", function () {
         var newText = inputText.value;
+
         if (newText === "") {
             validationMessage.style.display = "block";
             inputText.focus();
@@ -32,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             var editButton = li.children[2];
             editButton.addEventListener("click", function () {
                 li.innerHTML = "<input type='text'><button type='button' class='buttons'>Отменить</button>" +
-                    "<button type='button' class='buttons'>Сохранить</button>";
+                    "<button type='button' class='buttons'>Сохранить</button>" +
+                    "<div class='validation-message' style='display: none;'>Введите текст!</div>";
 
                 var editingText = li.children[0];
                 editingText.value = text;
@@ -46,8 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 //сохранить изменения
                 var editingSave = li.children[2];
+                var editingValidationMessage = li.children[3];
                 editingSave.addEventListener("click", function () {
                     var editedText = editingText.value;
+
+                    if (editedText === "") {
+                        editingValidationMessage.style.display = "block";
+                        editingText.focus();
+                        return;
+                    }
+
                     addNote(editedText);
                 });
             });
