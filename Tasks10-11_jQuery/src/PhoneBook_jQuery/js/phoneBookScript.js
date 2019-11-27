@@ -40,7 +40,7 @@ $(document).ready(function () {
         notesCount++;
         var tr = $("<tr>");
         tr.html("<td></td><td></td><td></td><td></td>" +
-            "<td class='text-center'><button type='button' class='btn'>x</button></td>");
+            "<td class='text-center'><button type='button' class='btn' title='Удалить'>x</button></td>");
 
         tr.children().eq(0).text(notesCount);
         tr.children().eq(1).text(surname.val());
@@ -55,9 +55,7 @@ $(document).ready(function () {
         });
 
         phoneBook.append(tr);
-        inputFields.each(function () {
-            $(this).val("");
-        })
+        inputFields.val("");
     });
 
     inputFields.keyup(function () {
