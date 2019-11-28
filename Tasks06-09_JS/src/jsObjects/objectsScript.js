@@ -63,7 +63,7 @@ function getCountriesInfoObject(array) {
         var key = c.name;
         countriesInfo[key] = c.cities.reduce(function (memo, e) {
             return memo + e.population;
-        }, 0)
+        }, 0);
     });
 
     return countriesInfo;
