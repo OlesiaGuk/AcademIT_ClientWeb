@@ -32,7 +32,8 @@ $(document).ready(function () {
             var editButton = li.children().eq(2);
             editButton.click(function () {
                 li.html("<input type='text'><button type='button' class='buttons'>Отменить</button>" +
-                    "<button type='button' class='buttons'>Сохранить</button>");
+                    "<button type='button' class='buttons'>Сохранить</button>" +
+                    "<div class='validation-message' style='display: none;'>Введите текст!</div>");
 
                 var editingText = li.children().eq(0);
                 editingText.val(text);
@@ -46,8 +47,16 @@ $(document).ready(function () {
 
                 //сохранить изменения
                 var editingSave = li.children().eq(2);
+                var editingValidationMessage = li.children().eq(3);
                 editingSave.click(function () {
                     var editedText = editingText.val();
+
+                    if (editedText === "") {
+                        editingValidationMessage.show();
+                        editingText.focus();
+                        return;
+                    }
+
                     addNote(editedText);
                 });
             });
