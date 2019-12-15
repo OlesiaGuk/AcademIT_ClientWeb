@@ -7,34 +7,50 @@
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
-
 <div id="app">
     <h1 class="text-center">To Do List</h1>
+
     <div class="container">
         <div class="row">
-            <div class="col col-auto">
-                <div class="input-group">
+            <div class="col col-auto mb-3">
+                <div class="input-group ">
                     <input class="form-control" :class="{'is-invalid':isInvalid}" type="text" v-model="newTodoText">
-                    <button class="btn btn-outline-primary" @click="addNote">Добавить</button>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" @click="addNote">Добавить</button>
+                    </div>
                 </div>
-                <div v-if="isInvalid" class="alert alert-danger">Введите текст!</div>
+                <div v-if="isInvalid" class="text-danger">Введите текст!</div>
             </div>
-
         </div>
+
         <div class="row">
-            <div class="col">
+            <div class="col-5">
                 <ul>
                     <li v-for="item in items">
-                        <span v-text="item.text" ></span>
-                        <button class="btn btn-outline-secondary" @click="deleteNote(item)">X</button>
-                        <button class="btn btn-outline-secondary" @click="editNote(item)">Редактировать</button>
+                        <div class="input-group input-group-sm">
+                            <span v-show="!item.isEditing" v-text="item.text" class="p-1"></span>
+                            <input v-show="item.isEditing" v-model="item.text"
+                                   class="form-control my-1" :class="{'is-invalid':item.isEmpty}">
+                            <button v-show="!item.isEditing" class="btn btn-outline-secondary btn-sm m-1"
+                                    @click="deleteNote(item)">X
+                            </button>
+                            <button v-show="!item.isEditing" class="btn btn-outline-secondary btn-sm my-1"
+                                    @click="editNote(item)">Редактировать
+                            </button>
+
+                            <button v-show="item.isEditing" class="btn btn-outline-secondary btn-sm m-1"
+                                    @click="cancelEditing(item)">Отменить
+                            </button>
+                            <button v-show="item.isEditing" class="btn btn-outline-secondary btn-sm my-1"
+                                    @click="saveEditing(item)">Сохранить
+                            </button>
+                        </div>
+                        <div v-if="item.isEmpty" class="text-danger">Введите текст!</div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-
-
 </div>
 <script src="node_modules/vue/dist/vue.js"></script>
 <script src="js/todoListScript.js"></script>
