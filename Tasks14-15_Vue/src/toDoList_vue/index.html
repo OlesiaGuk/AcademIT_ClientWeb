@@ -12,7 +12,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col col-auto mb-3">
+            <div class="col col-sm-12 col-lg-5 mb-3">
                 <div class="input-group ">
                     <input class="form-control" :class="{'is-invalid':isInvalid}" type="text" v-model="newTodoText">
                     <div class="input-group-append">
@@ -24,26 +24,30 @@
         </div>
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-sm-8">
                 <ul>
-                    <li v-for="item in items">
+                    <li v-for="(item, index) in items">
                         <div class="input-group input-group-sm">
-                            <span v-show="!item.isEditing" v-text="item.text" class="p-1"></span>
-                            <input v-show="item.isEditing" v-model="item.text"
-                                   class="form-control my-1" :class="{'is-invalid':item.isEmpty}">
-                            <button v-show="!item.isEditing" class="btn btn-outline-secondary btn-sm m-1"
-                                    @click="deleteNote(item)">X
-                            </button>
-                            <button v-show="!item.isEditing" class="btn btn-outline-secondary btn-sm my-1"
-                                    @click="editNote(item)">Редактировать
-                            </button>
+                            <template v-if="!item.isEditing">
+                                <span v-text="item.text" class="p-1"></span>
+                                <button class="btn btn-outline-secondary btn-sm m-1"
+                                        @click="deleteNote(item)">X
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm my-1"
+                                        @click="editNote(item)">Редактировать
+                                </button>
+                            </template>
 
-                            <button v-show="item.isEditing" class="btn btn-outline-secondary btn-sm m-1"
-                                    @click="cancelEditing(item)">Отменить
-                            </button>
-                            <button v-show="item.isEditing" class="btn btn-outline-secondary btn-sm my-1"
-                                    @click="saveEditing(item)">Сохранить
-                            </button>
+                            <template v-if="item.isEditing">
+                                <input v-model="item.text" class="form-control my-1"
+                                       :class="{'is-invalid':item.isEmpty}">
+                                <button class="btn btn-outline-secondary btn-sm m-1"
+                                        @click="cancelEditing(item)">Отменить
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm my-1"
+                                        @click="saveEditing(item)">Сохранить
+                                </button>
+                            </template>
                         </div>
                         <div v-if="item.isEmpty" class="text-danger">Введите текст!</div>
                     </li>
