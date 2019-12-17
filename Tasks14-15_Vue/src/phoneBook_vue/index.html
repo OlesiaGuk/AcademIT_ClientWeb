@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>PhoneBook</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="phone-book">
+    <h1 class="text-center mb-4 font-italic">Телефонная книга</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <div class="text-center h5"><label>Добавить новый контакт</label></div>
+                    <div class="form-group row">
+                        <label for="surname" class="col-sm-4 col-form-label">Фамилия</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="surname" v-model="surname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-4 col-form-label">Имя</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="name" v-model="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone-number" class="col-sm-5 col-form-label">Номер
+                            телефона</label>
+                        <div class="col-sm-7">
+                            <input type="tel" class="form-control" id="phone-number" v-model="phoneNumber">
+                        </div>
+                    </div>
+
+                    <template v-if="errors.length">
+                        <div class="row">
+                            <div class="col-12">
+                                <div  class="alert alert-warning text-right">Необходимо заполнить поля:
+                                    <ul class="list-unstyled">
+                                        <li v-for="(error, index) in errors">{{error}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div v-if="isInvalidNumber" class="alert alert-danger text-right">
+                                Некорректный номер телефона!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
+                            <button type="button" class="btn btn-outline-primary btn-sm" id="add-button"
+                                    @click="checkForm">
+                                Добавить контакт
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-md-8">
+                <div class="text-center h5"><label>Контакты</label></div>
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Номер телефона</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(item, index) in items">
+                        <td v-text="index"></td>
+                        <td v-text="item.surnameNote"></td>
+                        <td v-text="item.nameNote"></td>
+                        <td v-text="item.phoneNumberNote"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="js/phoneBookVueScript.js"></script>
+</body>
+</html>
