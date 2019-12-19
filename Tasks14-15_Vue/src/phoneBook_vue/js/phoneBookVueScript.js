@@ -9,12 +9,30 @@ new Vue({
         isInvalidNumber: false
 
     },
+
+    computed: {
+        checkedAll: {
+            get: function () {
+                return this.items.length > 0 && this.items.every(function (x) {
+                    return x.checked;
+                });
+            },
+
+            set: function (val) {
+                this.items.forEach(function (x) {
+                    x.checked = val;
+                })
+            }
+        }
+    },
+
     methods: {
         checkForm: function () {
             this.errors = [];
 
             if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
                 this.addContact();
+                this.isInvalidNumber = false;
                 return true;
             }
 
@@ -38,10 +56,16 @@ new Vue({
         },
 
         addContact: function () {
+            if (this.checkDuplicate(this.phoneNumber)) {
+                alert("Такой номер телефона есть в списке!");//todo: заменить на сообщение валидации из библиотеки
+                return;
+            }
+
             this.items.push({
                 surnameNote: this.surname,
                 nameNote: this.name,
                 phoneNumberNote: this.phoneNumber,
+                checked: false
             });
 
             this.surname = "";
@@ -49,7 +73,29 @@ new Vue({
             this.phoneNumber = "";
         },
 
+        deleteNote: function (item) {
+            this.items = this.items.filter(function (x) {
+                return x !== item;
+            })
+        },
 
+        deleteCheckedNotes: function () {
+            if (this.checkedAll === true) {
+                this.items = [];
+                this.checkedAll = false;
+                return;
+            }
+
+            this.items = this.items.filter(function (x) {
+                return x.checked !== true;
+            });
+        },
+
+        checkDuplicate: function (newPhoneNumber) {
+            return this.items.find(function (x) {
+                return x.phoneNumberNote === newPhoneNumber;
+            });
+        }
     }
 
 });

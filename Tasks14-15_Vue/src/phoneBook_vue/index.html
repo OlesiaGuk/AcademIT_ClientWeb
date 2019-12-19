@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,6 +19,7 @@
                         <label for="surname" class="col-sm-4 col-form-label">Фамилия</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="surname" v-model="surname">
+                            <!--todo: класс is-invalid-->
                         </div>
                     </div>
                     <div class="form-group row">
@@ -38,7 +39,7 @@
                     <template v-if="errors.length">
                         <div class="row">
                             <div class="col-12">
-                                <div  class="alert alert-warning text-right">Необходимо заполнить поля:
+                                <div class="alert alert-warning text-right">Необходимо заполнить поля:
                                     <ul class="list-unstyled">
                                         <li v-for="(error, index) in errors">{{error}}</li>
                                     </ul>
@@ -71,20 +72,28 @@
                 <table class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
+                        <th><input type="checkbox" v-model="checkedAll"></th>
+                        <!--todo: убрать checked при загрузке страницы-->
                         <th>№</th>
                         <th>Фамилия</th>
                         <th>Имя</th>
                         <th>Номер телефона</th>
-                        <th></th>
+                        <th class='text-center'>
+                            <button type="button" class="btn" title="Удалить выбранные" @click="deleteCheckedNotes">x
+                            </button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="(item, index) in items">
-                        <td v-text="index"></td>
+                        <td><input type="checkbox" v-model="item.checked"></td>
+                        <td>{{index+1}}</td> <!--todo: убрать мелькание при загрузке страницы-->
                         <td v-text="item.surnameNote"></td>
                         <td v-text="item.nameNote"></td>
                         <td v-text="item.phoneNumberNote"></td>
-                        <td></td>
+                        <td class='text-center'>
+                            <button type="button" class="btn" title="Удалить" @click="deleteNote(item)">x</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
