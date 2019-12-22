@@ -76,6 +76,7 @@ new Vue({
         },
 
         deleteNote: function (item) {
+            var currentInstance = this;
 
             this.$dialog.confirm({
                     title: "Подтвердите удаление",
@@ -85,30 +86,42 @@ new Vue({
                     okText: "Удалить",
                     cancelText: "Отмена"
                 })
-                .then(function (dialog) {
-                    this.items = this.items.filter(function (x) {
+                .then(function () {
+                    currentInstance.items = currentInstance.items.filter(function (x) {
                         return x !== item;
                     });
-                    console.log("???");
-
                 })
                 .catch(function () {
-                    console.log("cancelled")
+                    console.log("Cancelled")
                 });
 
 
         },
 
         deleteCheckedNotes: function () {
-            if (this.checkedAll === true) {
-                this.items = [];
-                this.checkedAll = false;
-                return;
-            }
+            var currentInstance = this;
 
-            this.items = this.items.filter(function (x) {
-                return x.checked !== true;
-            });
+            this.$dialog.confirm({
+                    title: "Подтвердите удаление",
+                    body: "Удалить выбранные контакты?"
+                },
+                {
+                    okText: "Удалить",
+                    cancelText: "Отмена"
+                })
+                .then(function () {
+                    if (currentInstance.checkedAll === true) {
+                        currentInstance.items = [];
+                        currentInstance.checkedAll = false;
+                        return;
+                    }
+                    currentInstance.items = currentInstance.items.filter(function (x) {
+                        return x.checked === false;
+                    })
+                })
+                .catch(function () {
+                    console.log("Cancelled")
+                });
         },
 
         checkDuplicate: function (newPhoneNumber) {
@@ -118,5 +131,4 @@ new Vue({
         }
     }
 
-})
-;
+});
