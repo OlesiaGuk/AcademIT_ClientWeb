@@ -1,3 +1,5 @@
+window.Vue.use(VuejsDialog.main.default);
+
 new Vue({
     el: "#phone-book",
     data: {
@@ -57,7 +59,7 @@ new Vue({
 
         addContact: function () {
             if (this.checkDuplicate(this.phoneNumber)) {
-                alert("Такой номер телефона есть в списке!");//todo: заменить на сообщение валидации из библиотеки
+                this.$dialog.alert('Номер ' + this.phoneNumber + ' уже есть в списке контактов', {okText: "ОК"});
                 return;
             }
 
@@ -74,9 +76,27 @@ new Vue({
         },
 
         deleteNote: function (item) {
-            this.items = this.items.filter(function (x) {
-                return x !== item;
-            })
+
+            this.$dialog.confirm({
+                    title: "Подтвердите удаление",
+                    body: "Удалить контакт с номером " + item.phoneNumberNote + "?"
+                },
+                {
+                    okText: "Удалить",
+                    cancelText: "Отмена"
+                })
+                .then(function (dialog) {
+                    this.items = this.items.filter(function (x) {
+                        return x !== item;
+                    });
+                    console.log("???");
+
+                })
+                .catch(function () {
+                    console.log("cancelled")
+                });
+
+
         },
 
         deleteCheckedNotes: function () {
@@ -98,4 +118,5 @@ new Vue({
         }
     }
 
-});
+})
+;
