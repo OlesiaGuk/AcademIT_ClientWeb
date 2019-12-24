@@ -70,11 +70,13 @@
             </div>
             <div class="col-md-8">
                 <div class="text-center h5"><label>Контакты</label></div>
+                <input type="text" v-model="searchText">
+                <button type="button">Применить</button>
+                <button type="button">Сбросить фильтр</button>
                 <table class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
                         <th><input type="checkbox" v-model="checkedAll"></th>
-                        <!--todo: убрать checked при загрузке страницы-->
                         <th>№</th>
                         <th>Фамилия</th>
                         <th>Имя</th>
@@ -96,6 +98,18 @@
                             <button type="button" class="btn" title="Удалить" @click="deleteNote(item)">x</button>
                         </td>
                     </tr>
+
+               <!--     <tr v-for="(item, index) in filteredItems">
+                        <td><input type="checkbox" v-model="item.checked"></td>
+                        <td>{{index+1}}</td> &lt;!&ndash;todo: убрать мелькание при загрузке страницы&ndash;&gt;
+                        <td v-text="item.surnameNote"></td>
+                        <td v-text="item.nameNote"></td>
+                        <td v-text="item.phoneNumberNote"></td>
+                        <td class='text-center'>
+                            <button type="button" class="btn" title="Удалить" @click="deleteNote(item)">x</button>
+                        </td>
+                    </tr>-->
+
                     </tbody>
                 </table>
             </div>

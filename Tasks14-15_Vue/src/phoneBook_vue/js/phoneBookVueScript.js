@@ -8,8 +8,8 @@ new Vue({
         name: "",
         phoneNumber: "",
         errors: [],
-        isInvalidNumber: false
-
+        isInvalidNumber: false,
+        searchText: ""
     },
 
     computed: {
@@ -25,6 +25,15 @@ new Vue({
                     x.checked = val;
                 })
             }
+        },
+
+        filteredItems: function () {
+            var text = this.searchText.toUpperCase();
+
+            return this.items.filter(function (e) {
+                return text.length === 0 || e.surnameNote.toUpperCase().indexOf(text) >= 0
+                    || e.nameNote.toUpperCase().indexOf(text) >= 0;
+            })
         }
     },
 
