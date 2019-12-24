@@ -4,7 +4,8 @@ new Vue({
             items: [],
             newTodoText: "",
             isInvalid: false,
-            editingText: ""
+            editingText: "",
+            count: 0
         },
 
         methods: {
@@ -19,7 +20,8 @@ new Vue({
                 this.items.push({
                     text: this.newTodoText,
                     isEditing: false,
-                    isEmpty: false
+                    isEmpty: false,
+                    id: ++this.count
                 });
 
                 this.newTodoText = "";
