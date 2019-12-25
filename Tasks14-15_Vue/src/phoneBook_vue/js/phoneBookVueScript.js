@@ -9,7 +9,11 @@ new Vue({
         phoneNumber: "",
         errors: [],
         isInvalidNumber: false,
-        searchText: ""
+        isEmptySurname: false,
+        isEmptyName: false,
+        isEmptyNumber: false,
+        currentErrorId: 0,
+        currentContactId: 0
     },
 
     computed: {
@@ -25,21 +29,15 @@ new Vue({
                     x.checked = val;
                 })
             }
-        },
-
-        filteredItems: function () {
-            var text = this.searchText.toUpperCase();
-
-            return this.items.filter(function (e) {
-                return text.length === 0 || e.surnameNote.toUpperCase().indexOf(text) >= 0
-                    || e.nameNote.toUpperCase().indexOf(text) >= 0;
-            })
         }
     },
 
     methods: {
         checkForm: function () {
             this.errors = [];
+            this.isEmptySurname = false;
+            this.isEmptyName = false;
+            this.isEmptyNumber = false;
 
             if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
                 this.addContact();
@@ -48,15 +46,30 @@ new Vue({
             }
 
             if (!this.surname) {
-                this.errors.push("Фамилия")
+                this.isEmptySurname = true;
+                this.currentErrorId++;
+                this.errors.push({
+                    id: this.currentErrorId,
+                    errorField: "Фамилия"
+                })
             }
 
             if (!this.name) {
-                this.errors.push("Имя")
+                this.isEmptyName = true;
+                this.currentErrorId++;
+                this.errors.push({
+                    id: this.currentErrorId,
+                    errorField: "Имя"
+                })
             }
 
             if (!this.phoneNumber) {
-                this.errors.push("Номер телефона")
+                this.isEmptyNumber = true;
+                this.currentErrorId++;
+                this.errors.push({
+                    id: this.currentErrorId,
+                    errorField: "Номер телефона"
+                })
             }
 
             if (isNaN(this.phoneNumber)) {
@@ -72,7 +85,9 @@ new Vue({
                 return;
             }
 
+            this.currentContactId++;
             this.items.push({
+                id: this.currentContactId,
                 surnameNote: this.surname,
                 nameNote: this.name,
                 phoneNumberNote: this.phoneNumber,
@@ -103,8 +118,6 @@ new Vue({
                 .catch(function () {
                     console.log("Cancelled")
                 });
-
-
         },
 
         deleteCheckedNotes: function () {
@@ -139,5 +152,4 @@ new Vue({
             });
         }
     }
-
 });
