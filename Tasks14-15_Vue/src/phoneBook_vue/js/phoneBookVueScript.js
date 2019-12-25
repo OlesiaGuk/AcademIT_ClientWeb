@@ -13,7 +13,8 @@ new Vue({
         isEmptyName: false,
         isEmptyNumber: false,
         currentErrorId: 0,
-        currentContactId: 0
+        currentContactId: 0,
+        searchText: ""
     },
 
     computed: {
@@ -29,6 +30,15 @@ new Vue({
                     x.checked = val;
                 })
             }
+        },
+
+        filteredItems: function () {
+            var text = this.searchText.toUpperCase();
+            return this.items.filter(function (e) {
+                return text.length === 0 || e.surnameNote.toUpperCase().indexOf(text) >= 0
+                    || e.nameNote.toUpperCase().indexOf(text) >= 0
+                    || e.phoneNumberNote.toUpperCase().indexOf(text) >= 0;
+            });
         }
     },
 
@@ -77,7 +87,8 @@ new Vue({
                 return;
             }
             this.isInvalidNumber = false;
-        },
+        }
+        ,
 
         addContact: function () {
             if (this.checkDuplicate(this.phoneNumber)) {
@@ -97,7 +108,8 @@ new Vue({
             this.surname = "";
             this.name = "";
             this.phoneNumber = "";
-        },
+        }
+        ,
 
         deleteNote: function (item) {
             var currentInstance = this;
@@ -118,7 +130,8 @@ new Vue({
                 .catch(function () {
                     console.log("Cancelled")
                 });
-        },
+        }
+        ,
 
         deleteCheckedNotes: function () {
             var currentInstance = this;
@@ -150,6 +163,10 @@ new Vue({
             return this.items.find(function (x) {
                 return x.phoneNumberNote === newPhoneNumber;
             });
+        },
+
+        clearFilter: function () {
+            return this.searchText = "";
         }
     }
 });
