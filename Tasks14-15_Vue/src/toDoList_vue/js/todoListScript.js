@@ -5,7 +5,7 @@ new Vue({
             newTodoText: "",
             isInvalid: false,
             editingText: "",
-            count: 0
+            currentId: 0
         },
 
         methods: {
@@ -16,12 +16,13 @@ new Vue({
                 }
 
                 this.isInvalid = false;
+                this.currentId++;
 
                 this.items.push({
                     text: this.newTodoText,
                     isEditing: false,
                     isEmpty: false,
-                    id: ++this.count
+                    id: this.currentId
                 });
 
                 this.newTodoText = "";

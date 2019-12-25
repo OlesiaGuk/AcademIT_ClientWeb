@@ -37,7 +37,6 @@
                                         @click="editNote(item)">Редактировать
                                 </button>
                             </template>
-
                             <template v-else>
                                 <input v-model="item.text" class="form-control my-1"
                                        :class="{'is-invalid':item.isEmpty}">
