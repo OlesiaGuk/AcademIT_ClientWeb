@@ -9,9 +9,6 @@ new Vue({
         phoneNumber: "",
         errors: [],
         isInvalidNumber: false,
-        isEmptySurname: false,
-        isEmptyName: false,
-        isEmptyNumber: false,
         currentErrorId: 0,
         currentContactId: 0,
         searchText: ""
@@ -28,7 +25,7 @@ new Vue({
             set: function (val) {
                 this.items.forEach(function (x) {
                     x.checked = val;
-                })
+                });
             }
         },
 
@@ -45,9 +42,6 @@ new Vue({
     methods: {
         checkForm: function () {
             this.errors = [];
-            this.isEmptySurname = false;
-            this.isEmptyName = false;
-            this.isEmptyNumber = false;
 
             if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
                 this.addContact();
@@ -56,30 +50,27 @@ new Vue({
             }
 
             if (!this.surname) {
-                this.isEmptySurname = true;
                 this.currentErrorId++;
                 this.errors.push({
                     id: this.currentErrorId,
                     errorField: "Фамилия"
-                })
+                });
             }
 
             if (!this.name) {
-                this.isEmptyName = true;
                 this.currentErrorId++;
                 this.errors.push({
                     id: this.currentErrorId,
                     errorField: "Имя"
-                })
+                });
             }
 
             if (!this.phoneNumber) {
-                this.isEmptyNumber = true;
                 this.currentErrorId++;
                 this.errors.push({
                     id: this.currentErrorId,
                     errorField: "Номер телефона"
-                })
+                });
             }
 
             if (isNaN(this.phoneNumber)) {
@@ -87,8 +78,7 @@ new Vue({
                 return;
             }
             this.isInvalidNumber = false;
-        }
-        ,
+        },
 
         addContact: function () {
             if (this.checkDuplicate(this.phoneNumber)) {
@@ -108,30 +98,25 @@ new Vue({
             this.surname = "";
             this.name = "";
             this.phoneNumber = "";
-        }
-        ,
+        },
 
         deleteNote: function (item) {
             var currentInstance = this;
 
             this.$dialog.confirm({
-                    title: "Подтвердите удаление",
-                    body: "Удалить контакт с номером " + item.phoneNumberNote + "?"
-                },
-                {
-                    okText: "Удалить",
-                    cancelText: "Отмена"
-                })
-                .then(function () {
-                    currentInstance.items = currentInstance.items.filter(function (x) {
-                        return x !== item;
-                    });
-                })
-                .catch(function () {
-                    console.log("Cancelled")
+                title: "Подтвердите удаление",
+                body: "Удалить контакт с номером " + item.phoneNumberNote + "?"
+            }, {
+                okText: "Удалить",
+                cancelText: "Отмена"
+            }).then(function () {
+                currentInstance.items = currentInstance.items.filter(function (x) {
+                    return x !== item;
                 });
-        }
-        ,
+            }).catch(function () {
+                console.log("Cancelled")
+            });
+        },
 
         deleteCheckedNotes: function () {
             var currentInstance = this;
@@ -145,13 +130,10 @@ new Vue({
                     cancelText: "Отмена"
                 })
                 .then(function () {
-                    if (currentInstance.checkedAll === true) {
-                        currentInstance.items = [];
-                        currentInstance.checkedAll = false;
-                        return;
-                    }
                     currentInstance.items = currentInstance.items.filter(function (x) {
-                        return x.checked === false;
+                        return x.checked === false
+                            || (x.checked === true && currentInstance.searchText.length > 0
+                                && !currentInstance.filteredItems.includes(x));
                     })
                 })
                 .catch(function () {
@@ -167,6 +149,16 @@ new Vue({
 
         clearFilter: function () {
             return this.searchText = "";
+        },
+
+        isEmpty: function (fieldName) {
+            if (this.errors.length > 0) {
+                return this.errors.find(function (x) {
+                    return x.errorField === fieldName;
+                });
+            }
+
+            return false;
         }
     }
 });
