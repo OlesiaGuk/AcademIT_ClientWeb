@@ -133,7 +133,7 @@ new Vue({
                     currentInstance.items = currentInstance.items.filter(function (x) {
                         return x.checked === false
                             || (x.checked === true && currentInstance.searchText.length > 0
-                                && !currentInstance.filteredItems.includes(x));
+                                && currentInstance.filteredItems.indexOf(x) < 0);
                     })
                 })
                 .catch(function () {
