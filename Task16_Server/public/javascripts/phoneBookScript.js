@@ -22,9 +22,6 @@ new Vue({
         searchText: "",
         errors: [],
         isInvalidNumber: false,
-        isEmptySurname: false,
-        isEmptyName: false,
-        isEmptyNumber: false,
         currentErrorId: 0
     },
 
@@ -43,7 +40,7 @@ new Vue({
             set: function (val) {
                 this.items.forEach(function (x) {
                     x.checked = val;
-                })
+                });
             }
         }
     },
@@ -58,15 +55,11 @@ new Vue({
 
             get("/getContacts", data).done(function (contacts) {
                 self.items = contacts;
-                console.log(contacts);
             });
         },
 
         checkForm: function () {
             this.errors = [];
-            this.isEmptySurname = false;
-            this.isEmptyName = false;
-            this.isEmptyNumber = false;
 
             if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
                 this.addContact();
@@ -75,30 +68,27 @@ new Vue({
             }
 
             if (!this.surname) {
-                this.isEmptySurname = true;
                 this.currentErrorId++;
                 this.errors.push({
                     id: this.currentErrorId,
                     errorField: "Фамилия"
-                })
+                });
             }
 
             if (!this.name) {
-                this.isEmptyName = true;
                 this.currentErrorId++;
                 this.errors.push({
                     id: this.currentErrorId,
                     errorField: "Имя"
-                })
+                });
             }
 
             if (!this.phoneNumber) {
-                this.isEmptyNumber = true;
                 this.currentErrorId++;
                 this.errors.push({
                     id: this.currentErrorId,
                     errorField: "Номер телефона"
-                })
+                });
             }
 
             if (isNaN(this.phoneNumber)) {
@@ -120,7 +110,7 @@ new Vue({
 
             post("/addContact", data).done(function (response) {
                 if (!response.success) {
-                    self.$dialog.alert((response.message), {okText: "ОК"});
+                    self.$dialog.alert(response.message, {okText: "ОК"});
                     return;
                 }
 
@@ -136,25 +126,22 @@ new Vue({
             var self = this;
 
             this.$dialog.confirm({
-                    title: "Подтвердите удаление",
-                    body: "Удалить выбранный контакт?"
-                },
-                {
-                    okText: "Удалить",
-                    cancelText: "Отмена"
-                })
-                .then(function () {
-                    post("/deleteContact", {id: c.id}).done(function (response) {
-                        if (!response.success) {
-                            self.$dialog.alert((response.message), {okText: "ОК"});
-                            return;
-                        }
-                        self.loadData();
-                    });
-                })
-                .catch(function () {
-                    console.log("Cancelled")
+                title: "Подтвердите удаление",
+                body: "Удалить выбранный контакт?"
+            }, {
+                okText: "Удалить",
+                cancelText: "Отмена"
+            }).then(function () {
+                post("/deleteContact", {id: c.id}).done(function (response) {
+                    if (!response.success) {
+                        self.$dialog.alert(response.message, {okText: "ОК"});
+                        return;
+                    }
+                    self.loadData();
                 });
+            }).catch(function () {
+                console.log("Cancelled");
+            });
         },
 
         search: function () {
@@ -186,7 +173,7 @@ new Vue({
                 .then(function () {
                     post("/deleteCheckedContacts", data).done(function (response) {
                         if (!response.success) {
-                            self.$dialog.alert((response.message), {okText: "ОК"});
+                            self.$dialog.alert(response.message, {okText: "ОК"});
                             return;
                         }
                         self.loadData();
@@ -195,6 +182,16 @@ new Vue({
                 .catch(function () {
                     console.log("Cancelled")
                 });
+        },
+
+        isEmpty: function (fieldName) {
+            if (this.errors.length > 0) {
+                return this.errors.find(function (x) {
+                    return x.errorField === fieldName;
+                });
+            }
+
+            return false;
         }
     }
 });

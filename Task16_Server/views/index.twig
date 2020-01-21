@@ -12,7 +12,8 @@
                     <div class="form-group row">
                         <label for="surname" class="col-sm-4 col-form-label">Фамилия</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" :class="{'is-invalid':isEmptySurname}" id="surname"
+                            <input type="text" class="form-control" :class="{'is-invalid':isEmpty('Фамилия')}"
+                                   id="surname"
                                    v-model="surname">
                         </div>
                     </div>
@@ -20,7 +21,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Имя</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" :class="{'is-invalid':isEmptyName}" id="name"
+                             <input type="text" class="form-control" :class="{'is-invalid':isEmpty('Имя')}" id="name"
                                    v-model="name">
                         </div>
                     </div>
@@ -30,7 +31,7 @@
                             телефона</label>
                         <div class="col-sm-7">
                             <input type="tel" class="form-control"
-                                   :class="{'is-invalid':isEmptyNumber || isInvalidNumber}"
+                                   :class="{'is-invalid':isEmpty('Номер телефона') || isInvalidNumber}"
                                    id="phone-number" v-model="phoneNumber">
                         </div>
                     </div>
@@ -41,7 +42,7 @@
                 <div class="col-12">
                   <div class="alert alert-warning text-right">Необходимо заполнить поля:
                     <ul class="list-unstyled">
-                      <li v-for="error in errors" :key="errors.id">{{error.errorField}}</li>
+                       <li v-for="error in errors" :key="error.id">{{ error.errorField }}</li>
                     </ul>
                   </div>
                 </div>
@@ -70,10 +71,8 @@
             <div class="col-md-8">
                 <div class="text-center h5"><label>Контакты</label></div>
                 <div class="row">
-                    <div class="input-group">
-                        <div class="col-md-5">
-                            <input type="text" v-model="searchText" class="form-control mb-1" placeholder="Фильтр">
-                        </div>
+                    <div class="col-md-8 input-group">
+                        <input type="text" v-model="searchText" class="form-control mb-1 mr-1" placeholder="Фильтр">
                           <button type="button" class="btn btn-outline-primary btn-sm mb-1 mr-2" @click="search">Поиск</button>
                         <button type="button" class="btn btn-outline-primary btn-sm mb-1" @click="clearSearch">Очистить
                         </button>
@@ -95,9 +94,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(item, index) in items" :key="items.id" v-cloak>
+                    <tr v-for="(item, index) in items" :key="item.id" v-cloak>
                         <td class="align-middle text-center"><input type="checkbox" v-model="item.checked"></td>
-                        <td class="align-middle">{{ index+1 }}</td>
+                        <td class="align-middle">{{ index + 1 }}</td>
                         <td v-text="item.surname" class="align-middle"></td>
                         <td v-text="item.name" class="align-middle"></td>
                         <td v-text="item.phoneNumber" class="align-middle"></td>
