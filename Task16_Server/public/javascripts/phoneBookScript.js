@@ -1,4 +1,5 @@
 window.Vue.use(VuejsDialog.main.default);
+/*var Promise = require("bluebird");*/
 
 function post(url, data) {
     return $.post({
@@ -55,6 +56,9 @@ new Vue({
 
             get("/getContacts", data).done(function (contacts) {
                 self.items = contacts;
+            }).fail(function () {
+                self.$dialog.alert("Ошибка на сервере");
+
             });
         },
 
@@ -119,6 +123,8 @@ new Vue({
                 self.surname = "";
                 self.name = "";
                 self.phoneNumber = "";
+            }).fail(function () {
+                self.$dialog.alert("Ошибка на сервере");
             });
         },
 
@@ -138,9 +144,9 @@ new Vue({
                         return;
                     }
                     self.loadData();
+                }).fail(function () {
+                    self.$dialog.alert("Ошибка на сервере");
                 });
-            }).catch(function () {
-                console.log("Cancelled");
             });
         },
 
@@ -177,18 +183,17 @@ new Vue({
                             return;
                         }
                         self.loadData();
+                    }).fail(function () {
+                        self.$dialog.alert("Ошибка на сервере");
                     });
-                })
-                .catch(function () {
-                    console.log("Cancelled")
                 });
         },
 
         isEmpty: function (fieldName) {
             if (this.errors.length > 0) {
-                return this.errors.find(function (x) {
-                    return x.errorField === fieldName;
-                });
+                return this.errors.map(function (e) {
+                    return e.errorField;
+                }).indexOf(fieldName) >= 0;
             }
 
             return false;

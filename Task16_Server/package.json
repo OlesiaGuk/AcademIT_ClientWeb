@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www -e js,twig --ignore public/"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "bootstrap": "^4.4.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
