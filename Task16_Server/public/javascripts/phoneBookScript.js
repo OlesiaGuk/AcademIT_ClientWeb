@@ -1,5 +1,4 @@
 window.Vue.use(VuejsDialog.main.default);
-/*var Promise = require("bluebird");*/
 
 function post(url, data) {
     return $.post({

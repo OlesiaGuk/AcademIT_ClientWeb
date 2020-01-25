@@ -21,9 +21,6 @@ router.post("/addContact", function (req, res) {
       var index = contacts.findIndex(function (c) {
           return contact.phoneNumber.toUpperCase() === c.phoneNumber.toUpperCase();
       });
-   /* var index = contacts.map(function (c) {
-        return c.phoneNumber.toUpperCase();
-    }).indexOf(contact.phoneNumber.toUpperCase());*/
     if (index >= 0) {
         res.send({
             success: false,
