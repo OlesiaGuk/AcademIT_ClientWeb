@@ -10,12 +10,30 @@
 </head>
 <body>
 {% block body %}{% endblock %}
+<script src="../libs/require.js"></script>
+<script>
+    requirejs.config({
+        baseUrl: "javascripts",
+        deps: ["phoneBookScript"],
+        paths: {
+            jquery: "../libs/jquery",
+            bootstrap: "../libs/bootstrap.bundle",
+            vue: "../libs/vue",
+            bluebird: "../libs/bluebird",
+            vuejsDialog: "../libs/vuejs-dialog.min"
+            {#todo: vuejs-dialog???#}
+        }
+    });
+</script>
+{#
 <script src="/libs/jquery.js"></script>
 <script src="/libs/bootstrap.bundle.js"></script>
 <script src="/libs/vue.js"></script>
 <script src="/libs/vuejs-dialog.min.js"></script>
 <script src="/libs/vuejs-dialog-mixin.min.js"></script>
+<script src="/libs/bluebird.js"></script>
 <script src="/javascripts/phoneBookScript.js"></script>
+#}
 
 </body>
 </html>

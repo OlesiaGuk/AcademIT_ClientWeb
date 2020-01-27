@@ -15,6 +15,7 @@
     "jquery": "^3.4.1",
     "morgan": "~1.9.1",
     "popper.js": "^1.16.0",
+    "requirejs": "^2.3.6",
     "twig": "~0.10.3",
     "vue.js": "^0.3.2",
     "vuejs-dialog": "^1.4.1"
