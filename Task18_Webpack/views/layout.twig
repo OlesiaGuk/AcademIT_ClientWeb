@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/libs/bootstrap.css'/>
+    <link rel='stylesheet' href='/libs/vuejs-dialog.min.css'/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+{% block body %}{% endblock %}
+<script src="/libs/require.js"></script>
+<script>
+    requirejs.config({
+        baseUrl: "javascripts",
+        deps: ["phoneBookScript"],
+        paths: {
+            jquery: "../libs/jquery",
+            bootstrap: "../libs/bootstrap.bundle",
+            vue: "../libs/vue",
+            vuejsDialog: "../libs/vuejs-dialog.min"
+            {#todo: vuejs-dialog???#}
+        }
+    });
+</script>
+
+{# todo:delete!!!
+<script src="/libs/jquery.js"></script>
+<script src="/libs/bootstrap.bundle.js"></script>
+<script src="/libs/vue.js"></script>
+<script src="/libs/vuejs-dialog.min.js"></script>
+<script src="/libs/vuejs-dialog-mixin.min.js"></script>
+<script src="/javascripts/phoneBookScript.js"></script>
+#}
+
+</body>
+</html>
