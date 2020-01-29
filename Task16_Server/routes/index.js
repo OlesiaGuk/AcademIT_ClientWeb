@@ -17,7 +17,6 @@ router.get("/getContacts", function (req, res) {
 
 router.post("/addContact", function (req, res) {
     var contact = req.body;
-   /* console.log(contact);*/
 
       var index = contacts.findIndex(function (c) {
           return contact.phoneNumber.toUpperCase() === c.phoneNumber.toUpperCase();
