@@ -1,14 +1,13 @@
-function post(url, data) {
-    return $.post({
-        url: url,
-        data: JSON.stringify(data),
-        contentType: "application/json"
-    });
-}
+import "bootstrap/dist/css/bootstrap.css";
+import "jquery-confirm/css/jquery-confirm.css";
+import "../css/style.css";
 
-function get(url, data) {
-    return $.get(url, data);
-}
+import $ from "jquery";
+import "jquery-confirm";
+import Vue from "vue";
+import "bootstrap";
+
+import PhoneBookService from "./phoneBookService";
 
 new Vue({
     el: "#phone-book",
@@ -177,7 +176,7 @@ new Vue({
                         btnClass: 'btn-primary',
                         keys: ['enter'],
                         action: function () {
-                            Ajax.post("/deleteCheckedContacts", data).done(function (response) {
+                            PhoneBookService.deleteCheckedContacts(data).done(function (response) {
                                 if (!response.success) {
                                     $.alert(response.message, {okText: "ОК"});
                                     return;
