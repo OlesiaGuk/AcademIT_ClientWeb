@@ -11363,7 +11363,7 @@ body[class*=jconfirm-no-scroll-] {
 }
 
 [v-cloak] {
-    display: none;
-}
+  display: none; }
+
 
 /*# sourceMappingURL=styles.css.map*/

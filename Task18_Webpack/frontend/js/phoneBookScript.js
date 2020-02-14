@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "jquery-confirm/css/jquery-confirm.css";
-import "../css/style.css";
+import "../css/style.scss";
 
 import $ from "jquery";
 import "jquery-confirm";

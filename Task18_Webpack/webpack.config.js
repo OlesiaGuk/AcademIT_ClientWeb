@@ -14,12 +14,21 @@ module.exports = {
         }
     },
     module: {
-        rules: [{
-            "test": /\.css$/,
-            "use": [
-                MiniCssExtractPlugin.loader, "css-loader"
-            ]
-        },
+        rules: [
+            {
+                "test": /\.scss$/,
+                "use": [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader"
+                ]
+            },
+            {
+                "test": /\.css$/,
+                "use": [
+                    MiniCssExtractPlugin.loader, "css-loader"
+                ]
+            },
             {
                 test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,
                 use: "file-loader?name=[path][name].[ext]?[hash]"
