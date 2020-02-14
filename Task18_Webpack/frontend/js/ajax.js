@@ -1,14 +1,14 @@
 import $ from "jquery";
 
 export default {
-    post: function (url, data) {
+    post(url, data) {
         return $.post({
-            url: url,
+            url,
             data: JSON.stringify(data),
             contentType: "application/json"
         });
     },
-    get: function (url, data) {
+    get(url, data) {
         return $.get(url, data);
     }
 };

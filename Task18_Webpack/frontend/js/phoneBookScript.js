@@ -22,20 +22,20 @@ new Vue({
         currentErrorId: 0
     },
 
-    created: function () {
+    created() {
         this.loadData();
     },
 
     computed: {
         checkedAll: {
-            get: function () {
-                return this.items.length > 0 && this.items.every(function (x) {
+            get() {
+                return this.items.length > 0 && this.items.every(x => {
                     return x.checked;
                 });
             },
 
-            set: function (val) {
-                this.items.forEach(function (x) {
+            set(val) {
+                this.items.forEach(x => {
                     x.checked = val;
                 });
             }
@@ -43,17 +43,15 @@ new Vue({
     },
 
     methods: {
-        loadData: function () {
-            var self = this;
-
-            PhoneBookService.getContacts(this.searchText).done(function (contacts) {
-                self.items = contacts;
-            }).fail(function () {
+        loadData() {
+            PhoneBookService.getContacts(this.searchText).done(contacts => {
+                this.items = contacts;
+            }).fail(() => {
                 $.alert("Ошибка на сервере");
             });
         },
 
-        checkForm: function () {
+        checkForm() {
             this.errors = [];
 
             if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
@@ -93,34 +91,32 @@ new Vue({
             this.isInvalidNumber = false;
         },
 
-        addContact: function () {
-            var data = {
+        addContact() {
+            const data = {
                 surname: this.surname,
                 name: this.name,
                 phoneNumber: this.phoneNumber,
                 checked: false
             };
 
-            var self = this;
-
-            PhoneBookService.addContact(data).done(function (response) {
+            PhoneBookService.addContact(data).done(response => {
                 if (!response.success) {
                     $.alert(response.message);
                     return;
                 }
 
-                self.loadData();
+                this.loadData();
 
-                self.surname = "";
-                self.name = "";
-                self.phoneNumber = "";
-            }).fail(function () {
+                this.surname = "";
+                this.name = "";
+                this.phoneNumber = "";
+            }).fail(() => {
                 $.alert("Ошибка на сервере");
             });
         },
 
-        deleteContact: function (c) {
-            var self = this;
+        deleteContact(c) {
+            const self = this; //для корректной работы с jquery-confirm
 
             $.confirm({
                 title: "Подтвердите удаление",
@@ -130,14 +126,14 @@ new Vue({
                         text: "Удалить",
                         btnClass: 'btn-primary',
                         keys: ['enter'],
-                        action: function () {
-                            PhoneBookService.deleteContact(c.id).done(function (response) {
+                        action() {
+                            PhoneBookService.deleteContact(c.id).done(response => {
                                 if (!response.success) {
                                     $.alert(response.message, {okText: "ОК"});
                                     return;
                                 }
                                 self.loadData();
-                            }).fail(function () {
+                            }).fail(() => {
                                 $.alert("Ошибка на сервере");
                             });
                         }
@@ -149,23 +145,23 @@ new Vue({
             })
         },
 
-        search: function () {
+        search() {
             this.loadData();
         },
 
-        clearSearch: function () {
+        clearSearch() {
             this.searchText = "";
             this.loadData();
         },
 
-        deleteCheckedContacts: function () {
-            var data = this.items.filter(function (c) {
+        deleteCheckedContacts() {
+            const data = this.items.filter(c => {
                 return c.checked;
-            }).map(function (c) {
+            }).map(c => {
                 return c.id;
             });
 
-            var self = this;
+            const self = this; //для корректной работы с jquery-confirm
 
             $.confirm({
                 title: "Подтвердите удаление",
@@ -175,14 +171,14 @@ new Vue({
                         text: "Удалить",
                         btnClass: 'btn-primary',
                         keys: ['enter'],
-                        action: function () {
-                            PhoneBookService.deleteCheckedContacts(data).done(function (response) {
+                        action() {
+                            PhoneBookService.deleteCheckedContacts(data).done(response => {
                                 if (!response.success) {
                                     $.alert(response.message, {okText: "ОК"});
                                     return;
                                 }
                                 self.loadData();
-                            }).fail(function () {
+                            }).fail(() => {
                                 $.alert("Ошибка на сервере");
                             });
                         }
@@ -194,9 +190,9 @@ new Vue({
             })
         },
 
-        isEmpty: function (fieldName) {
+        isEmpty(fieldName) {
             if (this.errors.length > 0) {
-                return this.errors.map(function (e) {
+                return this.errors.map(e => {
                     return e.errorField;
                 }).indexOf(fieldName) >= 0;
             }

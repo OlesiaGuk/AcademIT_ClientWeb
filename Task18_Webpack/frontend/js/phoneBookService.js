@@ -1,21 +1,21 @@
 import Ajax from "./ajax";
 
 export default {
-    addContact: function (contact) {
+    addContact(contact) {
         return Ajax.post("/addContact", contact);
     },
 
-    deleteContact: function (id) {
-        return Ajax.post("/deleteContact", {id: id});
+    deleteContact(id) {
+        return Ajax.post("/deleteContact", {id});
     },
 
-    deleteCheckedContacts: function (data) {
+    deleteCheckedContacts(data) {
         return Ajax.post("/deleteCheckedContacts", data);
     },
 
-    getContacts: function (term) {
-        var data = {
-            term: term,
+    getContacts(term) {
+        const data = {
+            term,
             timeStamp: new Date().toISOString()
         };
 

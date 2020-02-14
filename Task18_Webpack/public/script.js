@@ -109,18 +109,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-    post: function (url, data) {
-        return jquery__WEBPACK_IMPORTED_MODULE_0___default.a.post({
-            url: url,
-            data: JSON.stringify(data),
-            contentType: "application/json"
-        });
-    },
-    get: function (url, data) {
-        return jquery__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, data);
-    }
+  post: function post(url, data) {
+    return jquery__WEBPACK_IMPORTED_MODULE_0___default.a.post({
+      url: url,
+      data: JSON.stringify(data),
+      contentType: "application/json"
+    });
+  },
+  get: function get(url, data) {
+    return jquery__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, data);
+  }
 });
 
 /***/ }),
@@ -156,208 +155,196 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
-    el: "#phone-book",
-    data: {
-        items: [],
-        surname: "",
-        name: "",
-        phoneNumber: "",
-        searchText: "",
-        errors: [],
-        isInvalidNumber: false,
-        currentErrorId: 0
+  el: "#phone-book",
+  data: {
+    items: [],
+    surname: "",
+    name: "",
+    phoneNumber: "",
+    searchText: "",
+    errors: [],
+    isInvalidNumber: false,
+    currentErrorId: 0
+  },
+  created: function created() {
+    this.loadData();
+  },
+  computed: {
+    checkedAll: {
+      get: function get() {
+        return this.items.length > 0 && this.items.every(function (x) {
+          return x.checked;
+        });
+      },
+      set: function set(val) {
+        this.items.forEach(function (x) {
+          x.checked = val;
+        });
+      }
+    }
+  },
+  methods: {
+    loadData: function loadData() {
+      var _this = this;
+
+      _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].getContacts(this.searchText).done(function (contacts) {
+        _this.items = contacts;
+      }).fail(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
+      });
     },
+    checkForm: function checkForm() {
+      this.errors = [];
 
-    created: function () {
-        this.loadData();
+      if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
+        this.addContact();
+        this.isInvalidNumber = false;
+        return true;
+      }
+
+      if (!this.surname) {
+        this.currentErrorId++;
+        this.errors.push({
+          id: this.currentErrorId,
+          errorField: "Фамилия"
+        });
+      }
+
+      if (!this.name) {
+        this.currentErrorId++;
+        this.errors.push({
+          id: this.currentErrorId,
+          errorField: "Имя"
+        });
+      }
+
+      if (!this.phoneNumber) {
+        this.currentErrorId++;
+        this.errors.push({
+          id: this.currentErrorId,
+          errorField: "Номер телефона"
+        });
+      }
+
+      if (isNaN(this.phoneNumber)) {
+        this.isInvalidNumber = true;
+        return;
+      }
+
+      this.isInvalidNumber = false;
     },
+    addContact: function addContact() {
+      var _this2 = this;
 
-    computed: {
-        checkedAll: {
-            get: function () {
-                return this.items.length > 0 && this.items.every(function (x) {
-                    return x.checked;
-                });
-            },
-
-            set: function (val) {
-                this.items.forEach(function (x) {
-                    x.checked = val;
-                });
-            }
+      var data = {
+        surname: this.surname,
+        name: this.name,
+        phoneNumber: this.phoneNumber,
+        checked: false
+      };
+      _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].addContact(data).done(function (response) {
+        if (!response.success) {
+          jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert(response.message);
+          return;
         }
+
+        _this2.loadData();
+
+        _this2.surname = "";
+        _this2.name = "";
+        _this2.phoneNumber = "";
+      }).fail(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
+      });
     },
+    deleteContact: function deleteContact(c) {
+      var self = this; //для корректной работы с jquery-confirm
 
-    methods: {
-        loadData: function () {
-            var self = this;
-
-            _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].getContacts(this.searchText).done(function (contacts) {
-                self.items = contacts;
-            }).fail(function () {
-                jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
-            });
-        },
-
-        checkForm: function () {
-            this.errors = [];
-
-            if (this.surname && this.name && this.phoneNumber && !isNaN(this.phoneNumber)) {
-                this.addContact();
-                this.isInvalidNumber = false;
-                return true;
-            }
-
-            if (!this.surname) {
-                this.currentErrorId++;
-                this.errors.push({
-                    id: this.currentErrorId,
-                    errorField: "Фамилия"
-                });
-            }
-
-            if (!this.name) {
-                this.currentErrorId++;
-                this.errors.push({
-                    id: this.currentErrorId,
-                    errorField: "Имя"
-                });
-            }
-
-            if (!this.phoneNumber) {
-                this.currentErrorId++;
-                this.errors.push({
-                    id: this.currentErrorId,
-                    errorField: "Номер телефона"
-                });
-            }
-
-            if (isNaN(this.phoneNumber)) {
-                this.isInvalidNumber = true;
-                return;
-            }
-            this.isInvalidNumber = false;
-        },
-
-        addContact: function () {
-            var data = {
-                surname: this.surname,
-                name: this.name,
-                phoneNumber: this.phoneNumber,
-                checked: false
-            };
-
-            var self = this;
-
-            _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].addContact(data).done(function (response) {
+      jquery__WEBPACK_IMPORTED_MODULE_3___default.a.confirm({
+        title: "Подтвердите удаление",
+        content: "Удалить выбранный контакт?",
+        buttons: {
+          ok: {
+            text: "Удалить",
+            btnClass: 'btn-primary',
+            keys: ['enter'],
+            action: function action() {
+              _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].deleteContact(c.id).done(function (response) {
                 if (!response.success) {
-                    jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert(response.message);
-                    return;
+                  jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert(response.message, {
+                    okText: "ОК"
+                  });
+                  return;
                 }
 
                 self.loadData();
-
-                self.surname = "";
-                self.name = "";
-                self.phoneNumber = "";
-            }).fail(function () {
+              }).fail(function () {
                 jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
-            });
-        },
-
-        deleteContact: function (c) {
-            var self = this;
-
-            jquery__WEBPACK_IMPORTED_MODULE_3___default.a.confirm({
-                title: "Подтвердите удаление",
-                content: "Удалить выбранный контакт?",
-                buttons: {
-                    ok: {
-                        text: "Удалить",
-                        btnClass: 'btn-primary',
-                        keys: ['enter'],
-                        action: function () {
-                            _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].deleteContact(c.id).done(function (response) {
-                                if (!response.success) {
-                                    jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert(response.message, {okText: "ОК"});
-                                    return;
-                                }
-                                self.loadData();
-                            }).fail(function () {
-                                jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
-                            });
-                        }
-                    },
-                    cancel: {
-                        text: "Отмена"
-                    }
-                }
-            })
-        },
-
-        search: function () {
-            this.loadData();
-        },
-
-        clearSearch: function () {
-            this.searchText = "";
-            this.loadData();
-        },
-
-        deleteCheckedContacts: function () {
-            var data = this.items.filter(function (c) {
-                return c.checked;
-            }).map(function (c) {
-                return c.id;
-            });
-
-            var self = this;
-
-            jquery__WEBPACK_IMPORTED_MODULE_3___default.a.confirm({
-                title: "Подтвердите удаление",
-                content: "Удалить выбранные контакты?",
-                buttons: {
-                    ok: {
-                        text: "Удалить",
-                        btnClass: 'btn-primary',
-                        keys: ['enter'],
-                        action: function () {
-                            _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].deleteCheckedContacts(data).done(function (response) {
-                                if (!response.success) {
-                                    jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert(response.message, {okText: "ОК"});
-                                    return;
-                                }
-                                self.loadData();
-                            }).fail(function () {
-                                jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
-                            });
-                        }
-                    },
-                    cancel: {
-                        text: "Отмена"
-                    }
-                }
-            })
-        },
-
-        isEmpty: function (fieldName) {
-            if (this.errors.length > 0) {
-                return this.errors.map(function (e) {
-                    return e.errorField;
-                }).indexOf(fieldName) >= 0;
+              });
             }
-
-            return false;
+          },
+          cancel: {
+            text: "Отмена"
+          }
         }
+      });
+    },
+    search: function search() {
+      this.loadData();
+    },
+    clearSearch: function clearSearch() {
+      this.searchText = "";
+      this.loadData();
+    },
+    deleteCheckedContacts: function deleteCheckedContacts() {
+      var data = this.items.filter(function (c) {
+        return c.checked;
+      }).map(function (c) {
+        return c.id;
+      });
+      var self = this; //для корректной работы с jquery-confirm
+
+      jquery__WEBPACK_IMPORTED_MODULE_3___default.a.confirm({
+        title: "Подтвердите удаление",
+        content: "Удалить выбранные контакты?",
+        buttons: {
+          ok: {
+            text: "Удалить",
+            btnClass: 'btn-primary',
+            keys: ['enter'],
+            action: function action() {
+              _phoneBookService__WEBPACK_IMPORTED_MODULE_7__["default"].deleteCheckedContacts(data).done(function (response) {
+                if (!response.success) {
+                  jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert(response.message, {
+                    okText: "ОК"
+                  });
+                  return;
+                }
+
+                self.loadData();
+              }).fail(function () {
+                jquery__WEBPACK_IMPORTED_MODULE_3___default.a.alert("Ошибка на сервере");
+              });
+            }
+          },
+          cancel: {
+            text: "Отмена"
+          }
+        }
+      });
+    },
+    isEmpty: function isEmpty(fieldName) {
+      if (this.errors.length > 0) {
+        return this.errors.map(function (e) {
+          return e.errorField;
+        }).indexOf(fieldName) >= 0;
+      }
+
+      return false;
     }
+  }
 });
-
-
-
 
 /***/ }),
 
@@ -372,30 +359,26 @@ new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ajax__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ajax */ "./frontend/js/ajax.js");
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-    addContact: function (contact) {
-        return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].post("/addContact", contact);
-    },
-
-    deleteContact: function (id) {
-        return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].post("/deleteContact", {id: id});
-    },
-
-    deleteCheckedContacts: function (data) {
-        return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].post("/deleteCheckedContacts", data);
-    },
-
-    getContacts: function (term) {
-        var data = {
-            term: term,
-            timeStamp: new Date().toISOString()
-        };
-
-        return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].get("/getContacts", data);
-    }
+  addContact: function addContact(contact) {
+    return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].post("/addContact", contact);
+  },
+  deleteContact: function deleteContact(id) {
+    return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].post("/deleteContact", {
+      id: id
+    });
+  },
+  deleteCheckedContacts: function deleteCheckedContacts(data) {
+    return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].post("/deleteCheckedContacts", data);
+  },
+  getContacts: function getContacts(term) {
+    var data = {
+      term: term,
+      timeStamp: new Date().toISOString()
+    };
+    return _ajax__WEBPACK_IMPORTED_MODULE_0__["default"].get("/getContacts", data);
+  }
 });
-
 
 /***/ }),
 
