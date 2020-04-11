@@ -1,4 +1,4 @@
-# task19_vuetify
+# task19_todolist
 
 ## Project setup
 ```
