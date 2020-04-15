@@ -3,22 +3,22 @@
     lazy-validation
     ref="form"
   >
-    <v-container>
+    <v-container class="pl-0">
       <v-row>
-        <v-col class="col col-lg-5">
+        <v-col class="d-flex col-md-7 col-sm-12">
           <v-text-field
             :rules="noteRules"
             label="Текст заметки"
             v-model="newTodoText"
           ></v-text-field>
-        </v-col>
-        <v-col>
+       <!-- </v-col>
+        <v-col>-->
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <v-btn
                 @click="addNote"
                 class="mr-4"
-                color="success"
+                color="secondary"
                 fab
                 v-on="on"
               >
@@ -33,7 +33,8 @@
               <v-btn
                 @click="reset"
                 class="mr-4"
-                color="error"
+                color="tertiary"
+                dark
                 fab
                 v-on="on"
               >
@@ -52,16 +53,19 @@
   export default {
     name: "InputForm",
 
-    data: () => ({
-      newTodoText: "",
-      noteRules: [
-        value => !!value || "Введите текст!"
-      ]
-    }),
+    data() {
+      return {
+        newTodoText: "",
+        noteRules: [
+          value => !!value || "Введите текст!"
+        ]
+      };
+    },
 
     methods: {
       addNote() {
         if (this.newTodoText === "") {
+          this.$refs.form.validate();
           return;
         }
 
@@ -72,6 +76,7 @@
 
       reset() {
         this.newTodoText = "";
+        this.$refs.form.resetValidation();
       }
     }
   };

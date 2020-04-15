@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row>
+  <v-container class="ma-0">
+    <!--<v-row>
       <v-col>
         <v-content>
           <h1>To Do List</h1>
@@ -8,7 +8,10 @@
           <NotesList/>
         </v-content>
       </v-col>
-    </v-row>
+    </v-row>-->
+
+    <InputForm/>
+    <NotesList/>
 
   </v-container>
 </template>
