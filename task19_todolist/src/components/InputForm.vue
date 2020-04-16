@@ -3,21 +3,21 @@
     lazy-validation
     ref="form"
   >
-    <v-container class="pl-0">
+    <v-container>
       <v-row>
         <v-col class="d-flex col-md-7 col-sm-12">
           <v-text-field
             :rules="noteRules"
             label="Текст заметки"
             v-model="newTodoText"
+            class="pl-4"
           ></v-text-field>
-       <!-- </v-col>
-        <v-col>-->
+
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <v-btn
                 @click="addNote"
-                class="mr-4"
+                class="mr-1"
                 color="secondary"
                 fab
                 v-on="on"

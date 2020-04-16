@@ -1,18 +1,7 @@
 <template>
   <v-container class="ma-0">
-    <!--<v-row>
-      <v-col>
-        <v-content>
-          <h1>To Do List</h1>
-          <InputForm/>
-          <NotesList/>
-        </v-content>
-      </v-col>
-    </v-row>-->
-
     <InputForm/>
     <NotesList/>
-
   </v-container>
 </template>
 
@@ -22,6 +11,6 @@
 
   export default {
     name: "Home",
-    components: { NotesList, InputForm }
+    components: {NotesList, InputForm}
   };
 </script>

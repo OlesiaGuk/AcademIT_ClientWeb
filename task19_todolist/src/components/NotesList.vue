@@ -1,119 +1,134 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="col col-lg-5">
-        <ul>
-          <li :key="item.id" class="mt-1" v-for="item in this.$store.state.items">
-            <template v-if="!item.isEditing">
-              <span class="px-2" v-text="item.text"></span>
+      <v-col class="col-lg-12">
 
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    @click="editNote(item)"
-                    class="mr-1"
-                    color="secondary"
-                    dark
-                    fab
-                    v-on="on"
-                    x-small
-                  >
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                </template>
-                <span>Редактировать</span>
-              </v-tooltip>
-
-              <v-dialog
-                max-width="290"
-                v-model="dialog"
-              >
-                <template v-slot:activator="{ on: dialog }">
-
-                  <v-tooltip top>
-                    <template v-slot:activator="{ on: tooltip }">
-                      <v-btn
-                        @click.stop="dialog = true"
-                        color="tertiary"
-                        dark
-                        fab
-                        v-on="{ ...tooltip, ...dialog }"
-                        x-small
-                      >
-                        <v-icon>mdi-delete</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Удалить</span>
-                  </v-tooltip>
-                </template>
-
-                <v-card>
-                  <v-card-title>Удалить запись?</v-card-title>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-
-                    <v-btn
-                      @click="dialog = false"
-                      color="primary"
-                      text
-                    >
-                      Нет
-                    </v-btn>
-
-                    <v-btn
-                      @click="deleteNote(item)"
-                      color="primary"
-                      text
-                    >
-                      Да
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-
-            </template>
-
-            <template v-else>
-              <div class="d-flex pl-2">
-                <v-text-field :rules="editingRules" class="mt-0 mr-4 mb-n3" dense v-model="item.text">
-                </v-text-field>
-
+        <v-list flat>
+          <v-list-item-group>
+            <v-list-item
+              :key="item.id" v-for="item in this.$store.state.items"
+            >
+              <template v-if="!item.isEditing">
                 <v-tooltip top>
                   <template v-slot:activator="{ on }">
                     <v-btn
-                      @click="cancelEditing(item)"
+                      @click="editNote(item)"
                       class="mr-1"
-                      color="tertiary"
+                      color="secondary"
                       dark
                       fab
                       v-on="on"
                       x-small
                     >
-                      <v-icon>mdi-close</v-icon>
+                      <v-icon>mdi-pencil</v-icon>
                     </v-btn>
                   </template>
-                  <span>Отменить</span>
+                  <span>Редактировать</span>
                 </v-tooltip>
 
-                <v-tooltip top>
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      @click="saveEditing(item)"
-                      color="secondary"
-                      fab
-                      v-on="on"
-                      x-small
-                    >
-                      <v-icon>mdi-check</v-icon>
-                    </v-btn>
+                <v-dialog
+                  max-width="290"
+                  v-model="dialog"
+                >
+                  <template v-slot:activator="{ on: dialog }">
+
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on: tooltip }">
+                        <v-btn
+                          @click.stop="dialog = true"
+                          color="tertiary"
+                          dark
+                          fab
+                          v-on="{ ...tooltip, ...dialog }"
+                          x-small
+                        >
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Удалить</span>
+                    </v-tooltip>
                   </template>
-                  <span>Сохранить</span>
-                </v-tooltip>
-              </div>
-            </template>
-          </li>
-        </ul>
+
+                  <v-card>
+                    <v-card-title>Удалить запись?</v-card-title>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn
+                        @click="dialog = false"
+                        color="primary"
+                        text
+                      >
+                        Нет
+                      </v-btn>
+
+                      <v-btn
+                        @click="deleteNote(item)"
+                        color="primary"
+                        text
+                      >
+                        Да
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+
+                <v-list-item-content>
+                  <v-list-item-title class="px-2" v-text="item.text"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+
+              <template v-else>
+                <v-col class="d-flex pa-0">
+                  <v-btn
+                    class="mr-1 mt-2 ml-9"
+                    color="tertiary"
+                    dark
+                    fab
+                    x-small
+                  >
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
+
+                  <v-text-field :rules="editingRules" class="pl-2" dense v-model="item.text">
+                  </v-text-field>
+
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        @click="cancelEditing(item)"
+                        class="mr-1"
+                        color="tertiary"
+                        dark
+                        fab
+                        v-on="on"
+                        x-small
+                      >
+                        <v-icon>mdi-close</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Отменить</span>
+                  </v-tooltip>
+
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        @click="saveEditing(item)"
+                        color="secondary"
+                        fab
+                        v-on="on"
+                        x-small
+                      >
+                        <v-icon>mdi-check</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Сохранить</span>
+                  </v-tooltip>
+                </v-col>
+              </template>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
       </v-col>
     </v-row>
   </v-container>
