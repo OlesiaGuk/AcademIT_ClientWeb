@@ -11,9 +11,10 @@ export default new Vuex.Store({
 
   mutations: {
     addNote(state, newNote) {
+      state.currentId++;
       state.items.push({
         text: newNote,
-        id: state.currentId++,
+        id: state.currentId,
         isEditing: false
       });
     },

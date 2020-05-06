@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ma-0">
+  <v-container class="ma-0 pa-0">
     <InputForm/>
     <NotesList/>
   </v-container>
@@ -11,6 +11,6 @@
 
   export default {
     name: "Home",
-    components: {NotesList, InputForm}
+    components: { NotesList, InputForm }
   };
 </script>

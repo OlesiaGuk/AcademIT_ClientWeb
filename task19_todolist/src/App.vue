@@ -59,9 +59,11 @@
       source: String
     },
 
-    data: () => ({
-      drawer: null
-    })
+    data() {
+      return {
+        drawer: null
+      };
+    }
   };
 </script>
 

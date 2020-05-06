@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pt-0">
     <v-row>
       <v-col class="col-lg-12">
 
@@ -35,7 +35,7 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on: tooltip }">
                         <v-btn
-                          @click.stop="dialog = true"
+                          @click.stop="deletingItem=item, dialog=true"
                           color="tertiary"
                           dark
                           fab
@@ -63,7 +63,7 @@
                       </v-btn>
 
                       <v-btn
-                        @click="deleteNote(item)"
+                        @click="deleteNote(deletingItem)"
                         color="primary"
                         text
                       >
@@ -81,7 +81,7 @@
               <template v-else>
                 <v-col class="d-flex pa-0">
                   <v-btn
-                    class="mr-1 mt-2 ml-9"
+                    class="mr-1 mt-2"
                     color="tertiary"
                     dark
                     fab
@@ -90,14 +90,14 @@
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
 
-                  <v-text-field :rules="editingRules" class="pl-2" dense v-model="item.text">
+                  <v-text-field :rules="editingRules" class="px-2" dense v-model="item.text">
                   </v-text-field>
 
                   <v-tooltip top>
                     <template v-slot:activator="{ on }">
                       <v-btn
                         @click="cancelEditing(item)"
-                        class="mr-1"
+                        class="mr-1 mt-2"
                         color="tertiary"
                         dark
                         fab
@@ -114,6 +114,7 @@
                     <template v-slot:activator="{ on }">
                       <v-btn
                         @click="saveEditing(item)"
+                        class="mt-2"
                         color="secondary"
                         fab
                         v-on="on"
@@ -144,7 +145,8 @@
           value => !!value || "Введите текст!"
         ],
         editingText: "",
-        dialog: false
+        dialog: false,
+        deletingItem: {}
       };
     },
 
@@ -154,17 +156,17 @@
         this.$store.commit("deleteNote", item);
       },
 
-      editNote: function (item) {
+      editNote(item) {
         item.isEditing = true;
         item.editingText = item.text;
       },
 
-      cancelEditing: function (item) {
+      cancelEditing(item) {
         item.text = item.editingText;
         item.isEditing = false;
       },
 
-      saveEditing: function (item) {
+      saveEditing(item) {
         if (item.text === "") {
           return;
         }
@@ -174,3 +176,11 @@
     }
   };
 </script>
+
+<style>
+  @media screen and (max-width: 960px) {
+    .v-list-item {
+      padding: 0
+    }
+  }
+</style>
