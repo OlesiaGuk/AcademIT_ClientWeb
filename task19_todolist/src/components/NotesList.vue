@@ -6,7 +6,8 @@
         <v-list flat>
           <v-list-item-group>
             <v-list-item
-              :key="item.id" v-for="item in this.$store.state.items"
+              :key="item.id" class="pa-0 px-md-4"
+              v-for="item in $store.state.items"
             >
               <template v-if="!item.isEditing">
                 <v-tooltip top>
@@ -35,7 +36,7 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on: tooltip }">
                         <v-btn
-                          @click.stop="deletingItem=item, dialog=true"
+                          @click.stop="activateDeletingDialog(item)"
                           color="tertiary"
                           dark
                           fab
@@ -151,6 +152,11 @@
     },
 
     methods: {
+      activateDeletingDialog(item) {
+        this.deletingItem = item;
+        this.dialog = true;
+      },
+
       deleteNote(item) {
         this.dialog = false;
         this.$store.commit("deleteNote", item);
@@ -176,11 +182,3 @@
     }
   };
 </script>
-
-<style>
-  @media screen and (max-width: 960px) {
-    .v-list-item {
-      padding: 0
-    }
-  }
-</style>
